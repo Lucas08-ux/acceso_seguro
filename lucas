@@ -1,0 +1,25 @@
+server {
+    listen 80;
+    listen [::]:80;
+    root /var/www/lucas/html;
+    index index.html index.htm index.nginx-debian.html;
+    server_name lucas;
+
+    location / {
+        satisfy all;
+        allow 192.168.57.0/24;
+        allow 127.0.0.1;
+        deny all;
+        
+        auth_basic "Área restringida";
+        auth_basic_user_file /etc/nginx/.htpasswd;
+
+        try_files $uri $uri/ =404;
+    }
+
+    # Bloqueo de acceso a /contact.html con autenticación básica
+    location /contact.html {
+        auth_basic "Área restringida";
+        auth_basic_user_file /etc/nginx/.htpasswd;
+    }
+}
