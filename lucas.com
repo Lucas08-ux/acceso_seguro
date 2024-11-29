@@ -14,9 +14,6 @@ server {
         allow 192.168.57.0/24;
         allow 127.0.0.1;
         deny all;
-        
-        auth_basic "Área restringida";
-        auth_basic_user_file /etc/nginx/.htpasswd;
 
         try_files $uri $uri/ =404;
     }
